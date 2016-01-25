@@ -1,0 +1,92 @@
+\section{Common base with SP}
+\label{sec:common}
+
+The \emph{Simple propagation} (SP) algorithm, shown in Algorithm \ref{alg:sp}, runs in a factorization ${\cal F}$ finding all potentials $\phi(W)$ with a special property called ``one in, one out''.
+Namely, given two sets of variables $X$ and $Y$, $\phi(W)$ has one variable in $X-Y$ and another variable not in $X-Y$.
+SP returns a set of potentials that can be split into two disjoint subsets: one containing potentials $\phi(W)$ where $W \subseteq X$ and another ones with potentials $\phi(W)$ where $W \cap X = \emptyset$.
+
+\begin{algorithm}[htb]
+    \caption{Simple Propagation.}
+    \label{alg:sp}
+    \begin{algorithmic}[1]
+        \Procedure{SPropagation}{${\cal F}$, $X$, $Y$}
+        \While{$\exists ~ \phi(W) \in {\cal F}$ with $v \notin X-Y$ and $v^\prime \in X-Y$}\label{alg:sp_in_out}
+        	\State ${\cal F}$ = \Call{RemoveBarren}{$v$, ${\cal F}$, $S$} \label{alg:sp_barren}
+            \State ${\cal F}$ = \Call{SumOut}{$v$, ${\cal F}$} \label{alg:sp_sum_out}
+        \EndWhile
+    \Return{${\cal F}$}
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{example}
+Run Algorithm \ref{alg:sp} with ${\cal F} ~=~ \{P(a)$, $P(b|a)$, $P(c|a)$, $P(d|b,c)$, $P(e|d)$, $P(f|d,e)$, $P(g|e)$, $P(h|e)$, $P(i|d,g)$, $P(j|i)$, $P(k|j)$, $P(l|k)$, $P(m|h,l)\}$, $X = \{i,j,k,l,m\}$, and $Y = \{d\}$.
+SP returns ${\cal F} ~=~ \{P(a)$, $P(b|a)$, $P(c|a)$, $P(n|c)$, $P(d=0|b,c)$, $P(j|i)$, $P(i,m|d=0,l)\}$.
+\label{ex:sp}
+\end{example}
+
+In Example \ref{ex:sp}, it is worth noticing that the returned factorization ${\cal F}$ can be split into two disjoin subsets: 
+\begin{align}
+	\{ P(j|i), P(i,m|d=0,l) \}
+	\label{eq:1}
+\end{align}
+and
+\begin{align}
+	\{ P(a), P(b|a)\}, P(c|a), P(c|a), P(n|c), P(d=0|b,c) \}.
+	\label{eq:2}
+\end{align}
+(\ref{eq:1}) contains potentials with variables in $X$ and ({\ref{eq:2}}) the potentials with no variables in $X$.
+
+
+\section{Unifying Inference and Modeling}
+\label{sec:new}
+
+SP can be used to perform BN inference.
+The set of potentials ${\cal F}_{SP}$ returned by Algorithm \ref{alg:sp}, $\Call{SPropagation}{{\cal F},X,Y}$, contains all potentials relevant for a query $P(X|Y)$.
+As shown in \cite{butzetal16}, all potentials $\phi(W) \in {\cal F}_{SP}$ where $W \subseteq X$ has $W$ d-connected (not d-separated) to $X$.
+
+\begin{algorithm}[htb]
+    \caption{Inference.}
+    \label{alg:sp_inf}
+    \begin{algorithmic}[1]
+        \Procedure{Inference}{${\cal F}$, $X$, $Y$}
+    \State ${\cal F}_{SP}$ = $\Call{SPropagation}{{\cal F}, X, Y}$
+    %todo: discuss W \subseteq X or W \subseteq XY
+    \State ${\cal F}^\prime$ = $\{\phi(W) ~|~ \phi(W) \in {\cal F}_{SP}$ and $W \subseteq X\}$
+    \State $P(X,Y)$ = $\prod{\phi \in {\cal F}^\prime}$    
+    \Return{$P(X,Y)/P(Y)$}
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{example}
+Given a query $P(i,j,k,l,m | d=0)$ posed to BN ${\cal B}$ in Figure \ref{fig:dag}, run Algorithm \ref{alg:sp_inf} with ${\cal F} ~=~ \{P(a)$, $P(b|a)$, $P(c|a)$, $P(d|b,c)$, $P(e|d)$, $P(f|d,e)$, $P(g|e)$, $P(h|e)$, $P(i|d,g)$, $P(j|i)$, $P(k|j)$, $P(l|k)$, $P(m|h,l)\}$, $X = \{i,j,k,l,m\}$, and $Y = \{d\}$.
+\label{ex:sp_inf}
+\end{example}
+
+The important point in Example \ref{ex:sp_inf} is the use of SP to perform the bulk of the work to answer the query $P(i,j,k,l,m | d=0)$.
+
+SP can be used to test independencies.
+The set of potentials ${\cal F}_{SP}$ returned by Algorithm \ref{alg:sp}, $\Call{SPropagation}{{\cal F},X,Y}$, contains original CPTs from the BN for variables that are independent of $X$    relevant for a query $P(X|Y)$.
+As shown in \cite{butzetal16}, all potentials $\phi(W) \in {\cal F}_{SP}$ where $W \cap X = \emptyset$ has $W$ d-separated from $X$.
+Thus, to test the independence $I(X,Y,Z)$ we only need to check if $Z$ is a subset of the variables from the CPT $\phi(W)$ where $W \cap X = \emptyset$.
+
+\begin{algorithm}[h]
+    \caption{Modeling.}
+    \label{alg:sp_mod}
+    \begin{algorithmic}[1]
+        \Procedure{Modeling}{${\cal F}$, $X$, $Y$, $Z$}
+    \State ${\cal F}_{SP}$ = $\Call{SPropagation}{{\cal F}, X, Y}$
+    \State ${\cal F}_{Rest}$ = $\{P(v_i|P_i) ~|~ P(v_i|P_i) \in {\cal F}_{SP}$ and $F_i \cap X = \emptyset\}$
+    \State $\bar{R}$ = $\{v_i ~|~ P(v_i|P_i) \in {\cal F}_{Rest}\}$    
+    \Return{$Z \subseteq \bar{R}$}
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{example}
+Given a test of independence $I(ijklm, d, a)$ posed to BN ${\cal B}$ in Figure \ref{fig:dag}, run Algorithm \ref{alg:sp_mod} with ${\cal F} ~=~ \{P(a)$, $P(b|a)$, $P(c|a)$, $P(d|b,c)$, $P(e|d)$, $P(f|d,e)$, $P(g|e)$, $P(h|e)$, $P(i|d,g)$, $P(j|i)$, $P(k|j)$, $P(l|k)$, $P(m|h,l)\}$, $X = \{i,j,k,l,m\}$, $Y = \{d\}$, and $Z = \{a\}$.
+\label{ex:sp_mod}
+\end{example}
+
+The important point in Example \ref{ex:sp_mod} is the use of SP to perform the bulk of the work to test the independence $I(ijklm, d, a)$.

@@ -1,0 +1,57 @@
+\documentclass[twoside,11pt]{article}
+
+%%%%% PACKAGES %%%%%%
+\usepackage{pgm2016}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{subcaption}
+\usepackage[utf8]{inputenc}		%NOT USED?
+\usepackage[english]{babel}		%NOT USED?
+\usepackage{paralist}			%NOT USED?
+\usepackage[lowtilde]{url}
+\usepackage{fixltx2e}
+
+%%%%% MACROS %%%%%%
+\algrenewcommand\Return{\State \algorithmicreturn{} }
+\algnewcommand{\LineComment}[1]{\State \(\triangleright\) #1}
+\renewcommand{\thesubfigure}{\roman{subfigure}}
+
+%%%%% HEADING %%%%%%
+% Heading arguments are {volume}{year}{pages}{submitted}{published}{author-full-names}
+%\pgmheading{1}{2000}{1-48}{4/00}{10/00}{Cory J. Butz, Jhonatan S. Oliveira, André E. dos Santos, and Anders L. Madsen}
+
+
+%%%%% SHORT HEADING %%%%%%
+% Short headings should be running head and authors last names
+\ShortHeadings{Research Task B - The Platform: Wit.ai}{dos Santos}
+\firstpageno{1}
+
+\begin{document}
+
+\title{The Platform: Wit.ai}
+
+\author{\name André E. dos Santos \email dossantos@cs.uregina.ca \\
+\addr Department of Computer Science \\
+University of Regina \\ 
+Regina, Canada
+}
+
+
+\maketitle
+
+\begin{abstract}%   <- trailing '%' for backward compatibility of .sty file
+%todo abstract
+\end{abstract}
+
+
+% Sections
+%\input{sections/introduction}
+%\input{sections/background}
+%\input{sections/new_work}
+%\input{sections/advantages}
+%\input{sections/conclusions}
+
+\vskip 0.2in
+\bibliography{references/references}
+\end{document}

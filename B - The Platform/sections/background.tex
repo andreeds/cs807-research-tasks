@@ -1,0 +1,122 @@
+\section{Background}
+\label{sec:back}
+
+Let $U = \{ v_1, v_2, \ldots , v_n \}$ be a finite set of variables, each with a finite domain, and $V$ be the domain of $U$.
+A \emph{potential} on $V$ is a function $\phi$ such that $\phi(v) \geq 0$ for each $v \in V$, and at least one $\phi(v) > 0$.
+Henceforth, we say $\phi$ is on $U$ instead of $V$.
+A \emph{joint probability distribution} is a potential $P$ on $U$, denoted $P(U)$, that sums to one.
+For disjoint $X,Y \subseteq U$, a \emph{conditional probability table} (CPT) $P(X|Y)$ is a potential over $X \cup Y$ that sums to one for each value $y$ of $Y$.
+For simplified notation, $\{ v_1, v_2, \ldots, v_n \}$ may be written as $v_1 v_2 \cdots v_n$, and $X \cup Y$ as $XY$.
+
+A \emph{Bayesian network} (BN) \cite{pear88} is a \emph{directed acyclic graph} (DAG) ${\cal B}$ on $U$ together with CPTs $P(v_1 | Pa(v_1))$, $P(v_2|Pa(v_2))$, $\ldots$, $P(v_n|Pa(v_n))$, where $Pa(v_i)$ denotes the parents (immediate predecessors) of $v_i$ in ${\cal B}$.
+For example, Figure \ref{fig:dag} depicts a BN, where CPTs $P(a),P(b|a),\ldots,P(m|g,l)$ are not shown.
+We call $\cal{B}$ a BN, if no confusion arises.
+The product of the CPTs for $\cal{B}$ on $U$ is a joint probability distribution $P(U)$.
+
+\begin{figure}[htb]
+    \begin{center}
+    	\includegraphics{figures/DAG.png}
+		\caption{A BN extended from \cite{madsen99}.}
+		\label{fig:dag}
+    \end{center}
+\end{figure}
+
+\emph{Variable elimination} (VE) \cite{zhan94} computes $P(X|Y=y)$, where $X$ and $Y$ are disjoint subsets of $U$, and $Y$ is observed taking value $y$.
+In VE (given as Algorithm \ref{alg:ve} below), $\Phi$ is the set of CPTs for ${\cal B}$, $X$ is a list of query variables, $Y$ is a list of observed variables, $y$ is the corresponding list of observed values, and $\sigma$ is an \emph{elimination ordering} \cite{Kja90} for variables $U - (XE)$.
+All elimination orderings in this paper are determined using \emph{weighted-min-fill} (WMF), which tends to be one of the best heuristics in practice \cite{koll09}.
+Evidence may not be denoted for simplified notation.
+
+\begin{algorithm}
+\caption{Variable elimination}
+\label{alg:ve}
+\begin{algorithmic}[1]
+\Function{Variable Elimination}{$\Phi$, $X$, $Y$, $y$, $\sigma$}
+    \State Delete rows disagreeing with $Y=y$ from $\phi \in \Phi$ \label{alg:ve_delete}
+    \While{$\sigma$ is not empty} \label{alg:ve_while}
+        \State Remove the first variable $v$ from $\sigma$
+        \State $\Phi$$ ~=~$ \Call{sum-out}{$v,\Phi$}
+    \EndWhile \label{alg:ve_end_while}
+    \State $P(X,Y=y) ~=~ \prod_{\phi \in \Phi} \phi$ \label{alg:ve_posterior}
+    \Return $P(X,Y=y) / \sum_X P(X,Y=y)$ \label{alg:ve_return}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+VE calls the sum-out algorithm, which eliminates $v$ from a set $\Phi$ of potentials by multiplying together all potentials involving $v$ and then summing $v$ out of the product.
+
+\begin{example}
+Run Algorithm \ref{alg:ve} to compute $P(i,j,k,l,m | d=0)$ in the BN ${\cal B}$ of Figure \ref{fig:dag}.
+\end{example}
+
+\emph{d-Separation} \cite{pear88} tests independencies in DAGs and can be presented as follows \cite{darwiche09}.
+Let $X$, $Y$, and $Z$ be pairwise disjoint sets of variables in a DAG ${\cal B}$.
+We say $X$ and $Z$ are \emph{d-separated} by $Y$, denoted $I(X,Y,Z)$, if at least one variable on every undirected path from $X$ to $Z$ is closed.
+On a path, there are three kinds of variable $v$:
+\begin{inparaenum}[(i)]
+	\item a \emph{sequential} variable means $v$ is a parent of one of its neighbours and a child of the other;
+	\item a \emph{divergent} variable is when $v$ is a parent of both neighbours; and
+	\item a \emph{convergent} variable is when $v$ is a child of both neighbours.
+\end{inparaenum}
+A variable $v$ is either open or closed.
+A sequential or divergent variable is \emph{closed}, if $v \in Y$.
+A convergent variable is \emph{closed}, if $( v \cup De(v) ) \cap Y = \emptyset$.
+A path with a closed variable is \emph{blocked}; otherwise, it is \emph{active}.
+[TODO] Inline example testing $I(a,d,k)$ with d-separation.
+
+The linear implementation of d-separation given in Algorithm \ref{alg:dsep} \cite{koll09} has two phases.
+Phase I determines the ancestors $An(Y)$ of $Y$ in the DAG ${\cal B}$ using the algorithm ANCESTORS (not shown).
+Phase II, uses the output of Phase I to determine all variables reachable from $X$ via active paths.
+This is more involved, since the algorithm must keep track of whether a variable $v$ is visited from a child, denoted $(\uparrow,v)$, or visited from a parent, denoted $(\downarrow,v)$.
+In Algorithm \ref{alg:dsep}, $L$ is the set of variables to be visited, $R$ is the set of reachable variables via active paths, and $V$ is the set of variables that have been visited.
+
+\begin{algorithm}[htb]
+\caption{\cite{koll09} Find nodes reachable from $X$ given $Y$ via active paths in DAG ${\cal B}$}
+\label{alg:dsep}
+\begin{algorithmic}[1]
+\Procedure{Reachable}{$X$,$Y$,${\cal B}$}
+	\LineComment{Phase I: insert $Y$ and all ancestors of $Y$ into $A$}
+	\State $An(Y) \leftarrow \Call{Ancestors}{Y,{\cal B}}$
+	\State $A \leftarrow An(Y) \cup Y$
+	\LineComment{Phase II: traverse active paths starting from $X$}
+	\For{$v \in X$} \Comment{(Node,direction) to be visited}
+		\State $L \leftarrow L \cup \{(\uparrow,v)\}$
+	\EndFor
+	\State $V \leftarrow \emptyset$ \Comment{(Node,direction) marked as visited}
+	\State $R \leftarrow \emptyset$ \Comment{Nodes reachable via active path}
+	\While{$L \neq \emptyset$} \Comment{While variables to be checked}
+		\State Select $(d,v)$ in $L$ \label{alg:lin_select_dsep}
+		\State $L \leftarrow L - \{(d,v)\}$
+		\If{$(d,v) \notin V$}
+			\If{$v \notin Y$}
+				\State $R \leftarrow R \cup \{v\}$ \Comment{$v$ is reachable}
+			\EndIf
+			\State $V \leftarrow V \cup \{(d,v)\}$ \Comment{Mark $(d,v)$ as visited}
+			\If{$d = \uparrow$ and $v \notin Y$}
+				\For{$v_i \in Pa(v)$}
+					\State $L \leftarrow L \cup \{(\uparrow,v_i)\}$
+				\EndFor
+				\For{$v_i \in Ch(v)$}
+					\State $L \leftarrow L \cup \{(\downarrow,v_i)\}$
+				\EndFor
+			\ElsIf{$d = \downarrow$}
+				\If{$v \notin Y$}
+					\For{$v_i \in Ch(v)$}
+						\State $L \leftarrow L \cup \{(\downarrow,v_i)\}$
+					\EndFor
+				\EndIf
+				\If{$v \in A$}
+					\For{$v_i \in Pa(v)$}
+						\State $L \leftarrow L \cup \{(\uparrow,v_i)\}$
+					\EndFor
+				\EndIf
+			\EndIf
+		\EndIf
+	\EndWhile
+	\Return{$R$}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{example}
+Run Algorithm \ref{alg:dsep} to test $I(a,d,k)$ in BN ${\cal B}$ illustrated in Figure \ref{fig:dag}.
+\end{example}

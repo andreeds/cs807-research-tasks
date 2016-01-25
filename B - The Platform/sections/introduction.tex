@@ -1,0 +1,28 @@
+\section{Introduction}
+\label{sec:intro}
+
+One fundamental task in \emph{Bayesian networks} (BNs) \cite{pear88} is inference.
+Given that some variables have been observed, the task is to compute posterior probabilities of other variables.
+\cite{koll09} introduce readers to exact inference in discrete BNs with the \emph{Variable Elimination} (VE) \cite{zhan94} algorithm.
+The VE algorithm uses its own terminology such as elimination orderings to modify the \emph{conditional probability tables} (CPTs) of the BN to answer queries.
+
+Another fundamental task in BNs is modeling, by which we mean testing which conditional independence relations hold in a given BN.
+More specifically, we want to know whether two sets $X$ and $Z$ of variables are conditionally independent given a third set $Y$ of variables.
+\cite{pearl86,pear88} introduced the \emph{directed separation} (d-separation) algorithm for this task.
+d-Separation uses its own specialized terminology such as closed convergent valves in the \emph{directed acyclic graph} (DAG) to determine whether or not an independent holds.
+
+In this paper, we aim to establish computation that is common to both inference and modeling.
+We organize the common computation as an algorithm, called \emph{Simple Propagation} (SP).
+SP takes the factorization of the BN CPTs and two sets $X$ and $Y$ of variables in the BN.
+SP modifies the factorization by removing all variables relevant to $X$ and $Y$.
+The output of SP can now be used for both inference and modeling.
+Surprisingly, one salient feature of SP is that it performs the bulk of the work leaving only a few steps to be executed for inference and for modeling.
+Another advantage of SP is that it brings unified terminology.
+Thereby, the work here provides a deeper understanding of BNs.
+
+
+This paper is organized as follows.
+In Section \ref{sec:back}, background is given.
+Unifying inference and modeling is done in Section \ref{sec:new}
+Section \ref{sec:adv} draws advantages of the new method.
+Conclusions are shown in Section \ref{sec:conc}.
