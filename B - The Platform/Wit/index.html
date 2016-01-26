@@ -3,13 +3,27 @@
     <link rel="stylesheet" href="microphone/microphone.min.css">
   </head>
   <body style="text-align: center;">
+   
+    <!-- The circle that will change color --> 
+    <svg height="150" width="150">
+    <circle id="circle" cx="75" cy="75" r="50" stroke="#b2b2b2" stroke-width="4"/>
+  </svg> 
+  <br>
+
+  <!-- Mic app from Wit.ai --> 
     <center><div id="microphone"></div></center>
     <pre id="result"></pre>
     <div id="info"></div>
     <div id="error"></div>
     <script src="microphone/microphone.min.js"></script>
 
+
     <script>
+      // default colour to "white"
+      var colour_circle = "white";
+      cc("white");
+
+
       var mic = new Wit.Microphone(document.getElementById("microphone"));
       var info = function (msg) {
         document.getElementById("info").innerHTML = msg;
@@ -23,12 +37,19 @@
       mic.onaudiostart = function () {
         info("Recording started");
         error("");
+        cc("red");
+      document.getElementById("result").innerHTML = ""; <!-- clear web-->
       };
       mic.onaudioend = function () {
         info("Recording stopped, processing started");
       };
       mic.onresult = function (intent, entities) {
+
+        console.log(intent)
+        console.log(entities)
+        console.log(entities.value_colour.value)
         var r = kv("intent", intent);
+
 
         for (var k in entities) {
           var e = entities[k];
@@ -43,6 +64,13 @@
         }
 
         document.getElementById("result").innerHTML = r;
+        
+        // if intent colour is observed, the circle fill attribute changes to its value
+        if (intent == "colour"){
+          cc(entities.value_colour.value);
+        }
+
+        
       };
       mic.onerror = function (err) {
         error("Error: " + err);
@@ -54,16 +82,28 @@
         info("Microphone is not connected");
       };
 
-      mic.connect("CLIENT_TOKEN");
+      mic.connect("AWRBY6WLIPAQP7PGCGMQQKKO45LELCWO");
       // mic.start();
       // mic.stop();
 
+
+      //function to transform intents and entities to "Key: value" strings
       function kv (k, v) {
         if (toString.call(v) !== "[object String]") {
           v = JSON.stringify(v);
         }
         return k + "=" + v + "\n";
       }
+
+      // to change "fill" attribute of Circle
+      function cc (j) {
+        document.getElementById("circle").setAttribute("fill", j);
+
+      }
+    
+   
     </script>
+
+
   </body>
   </html>
