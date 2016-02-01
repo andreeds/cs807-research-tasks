@@ -10,12 +10,18 @@
   </svg> 
   <br>
 
+
+
   <!-- Mic app from Wit.ai --> 
     <center><div id="microphone"></div></center>
+    <br>
+    <h3><div id="greet"></div> </h3>
+    <br>
     <pre id="result"></pre>
     <div id="info"></div>
     <div id="error"></div>
     <script src="microphone/microphone.min.js"></script>
+
 
 
     <script>
@@ -39,15 +45,13 @@
         error("");
         cc("red");
       document.getElementById("result").innerHTML = ""; <!-- clear web-->
+      document.getElementById("greet").innerHTML = "";
       };
       mic.onaudioend = function () {
         info("Recording stopped, processing started");
       };
       mic.onresult = function (intent, entities) {
 
-        console.log(intent)
-        console.log(entities)
-        console.log(entities.value_colour.value)
         var r = kv("intent", intent);
 
 
@@ -69,7 +73,9 @@
         if (intent == "colour"){
           cc(entities.value_colour.value);
         }
-
+        if (intent == "greetings"){
+          document.getElementById("greet").innerHTML = "Hi :)";
+        }
         
       };
       mic.onerror = function (err) {
