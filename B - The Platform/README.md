@@ -1,9 +1,8 @@
 ## Synopsis
 
-This project is an implementatiob of a Wit app and show all steps of its precesses.
-The objective of our application is to get colour information from voice recognition and change a *html* object with this colour "on the fly."
+This project is an implementation of a Wit app and show all steps of its process. 
+The objective of our application is to get colour information from voice recognition and change a *html* object with this colour "on the fly." 
 The result is **an interactive webpage that "understands'' voice orders and modify its object colour according to the commands of the user**.
-
 
 ## Code Example
 
