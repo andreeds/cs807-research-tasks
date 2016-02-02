@@ -95,7 +95,7 @@ Wit has a friendly interface, making the process of training quickly and easy.
 
 In this paper we implement a Wit app and show all steps of its precesses.
 The objective of our application is to get colour information from voice recognition and change a \emph{html} object with this colour ``on the fly.''
-The result is one of Wit many applications with an interactive webpage that ``understand'' voice commands and modify its object according to them.
+The result is an interactive webpage that ``understandsv'' voice orders and modify its object colour according to the commands of the user.
 
 
 This paper is organized as follows.
@@ -110,6 +110,8 @@ Conclusions are drawn in Section \ref{sec:conc}.
 In this section, we demonstrate the steps to build a voice application on Wit.ai that obtains colour information from voice recognition and changes one html object with it ``on the fly.''
 Note that, in order to sign up on Wit.ai and create the voice application, Wit only allow access through a \cite{github_2016} account.
 
+All steps are drawn from \cite{1_wit.ai_2016} Quick Start Guide.
+For mer details, please refer back to the original source.
 
 \subsection{The Console}
 
@@ -146,9 +148,9 @@ Once with a raw speech or text input, Wit.ai will determine what is the user int
 \label{exe:intent}
 All the following expressions should be mapped to the same intent:
 \begin{lstlisting}[language=html]
-``Change the colour to red''
-``Colour: red''
-``I want the colour to be red''
+``Change the colour to blue''
+``Colour: blue''
+``I want the colour to be blue''
 \end{lstlisting}
 \end{example}
 
@@ -157,15 +159,14 @@ Thus, it is the job of Wit.ai to map these expressions to actual intents.
 
 The user can browse existing intents from the community of Wit online.
 When typing examples for the intents, Wit will suggest these existing intents. 
-It is optional to browse the suggested intents and check  if one fits the current intent. 
-If so, clicking on “GET” will get a copy of the existing intent in the Wit app.
-If not, it is necessary to create a new intent.
+If one fits the intent, clicking on “GET” gets a copy of the existing intent in the Wit app.
+If there not exist an intent that fits, it is necessary to create a new intent.
 
-To create a new intent, type a name for your new intent in the Name your intent field.
+To create a new intent, the user must type a name for your new intent in the ``Name your intent'' field.
 Usually, intent names try to match the app functions or methods. 
-Add at least three expressions, even with synonymous way to say the same command.
+At least three expressions, even with synonymous way to say the same command, must be added.
 Figure \ref{fig:entents} shows the intents $colour$ and $greeting$ for the ColourTest App.
-Some of the expressions for $colour$ is listed in Example \ref{exe:intent}.
+Some of the expressions for $colour$ are listed in Example \ref{exe:intent}.
 
 
 \begin{figure*}[!h]
@@ -219,7 +220,7 @@ For instance, the entity $value\_colour$ was created for the intent $colour$, as
 Now we show how to add Wit to a web app.
 As a prerequisites, the browser must support \cite{webrtc}, which is the case of Chrome, Firefox and Opera.
 
-To integrate the voice app with the web app we need to create a new folder for the app, download the Web SDK (aka. Microphone) and extract the archive:
+To integrate the voice app with the web app we need to create a new folder for the app, download the \emph{Web SDK} (the microphone app) and extract the archive:
 \begin{lstlisting}[language=bash]
 	mkdir myapp
 	cd myapp
@@ -232,10 +233,14 @@ In the myapp folder, we must create a file $index.html$ containing the html prov
 In the Setting page of the voice app we generate a \emph{Client Access Token}, as illustrated in Figure \ref{fig:token} 
 A client access token is unique and authorizes the domain to access the voice app. 
 To use the client access token we must replace $CLIENT\_TOKEN$ on the $index.html$ file.
+For example, replace 
+\begin{lstlisting}[language=java]
+	mic.connect("CLIENT_TOKEN");
+\end{lstlisting}
+for the client access token of our running example, given
 \begin{lstlisting}[language=java]
 	mic.connect("AWRBY6WLIPAQP7PGCGMQQKKO45LELCWO");
 \end{lstlisting}
-
 
 \begin{figure*}[!h]
 \begin{center}
@@ -284,7 +289,6 @@ so when intent $colour$ is observed, the circle $fill$ attribute changes to its 
 \begin{lstlisting}[language=java]
 	function cc (j) {
 		document.getElementById("circle").setAttribute("fill", j);
-
 	}
 \end{lstlisting}
 
@@ -295,6 +299,7 @@ Thus, it can be called to also display a different colour when the mic is record
 		info("Recording started");
         error("");
         cc("red");
+	}
 \end{lstlisting}
 
 And, a response for $greetings$ can be given by:
@@ -331,7 +336,9 @@ The website also recognizes when greeted, and it will reply back with the senten
 \end{figure}
 
 
-The complete code can be found on the GitHub repository on this \href{https://github.com/andreeds/cs807-research-tasks/tree/master/B\%20-\%20The\%20Platform/Wit}{link}.
+The complete project can be found on the GitHub repository on this \href{https://github.com/andreeds/cs807-research-tasks/tree/master/B\%20-\%20The\%20Platform/Wit}{link}.
+The $ColourTest$ Wit Console is also open and can be reached on this \href{https://wit.ai/andreeds/ColourTest}{link}.
+
 
 \section{Conclusion}
 \label{sec:conc}
