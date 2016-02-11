@@ -1,63 +1,41 @@
 ## Synopsis
 
-This project is an implementation of a Wit app and show all steps of its process. 
-The objective of our application is to get colour information from voice recognition and change a *html* object with this colour "on the fly." 
-The result is **an interactive webpage that "understands'' voice orders and modify its object colour according to the commands of the user**.
+This project is theoretical research abouth quantum computers called **Beyond Quantum Computing:
+Are we living in a simulation?**.
 
-## Code Example
+For more details, read the abstract below.
 
-After activating the mic app and speaking the following order:
-> "Change the coulour to blue"
+## Abstract
 
-the web page will display: 
-
-``intent = colour``
-
-``value_colour = blue``
-
-and the *html* circle on the webpage will change its colour fill to blue.
+>When the future of computer comes to discussion, quantum computers is a salient topic.
+>Quantum computer uses the properties of quantum mechanical states to solve certain specific problems much faster than we know how to solve them using a conventional computer.
+>Thus, in the future humans will be able to simulate all sort of quantum chemistry and atomic physics efficiently, that means, humanity will have reached the "posthuman" stage.
+>
+>If quantum computers will simulate even billions of very distant stars, it could simulate the civilizations too.
+>If the concept of consciousness can be applied to computers, then simulating brains, and furthermore civilizations, is not so hard to believe. 
+>Therefore, in the posthuman stage we may want to simulate our ancestors
+>So, is it possible that we are living in a computer simulation?
+In this paper we show that it can be true.
 
 
 ## Motivation
 
 This project is one research task of the class *CS 807: Interactive Hardware and Embedded Computing*.
 
-This task in particulas is called **The Platform**, which requires to research and implement a practical example of an embedded, cloud, or high-performance computing platform, with a demonstration of the use of that platform. 
-It has to show more than the simple "hello world" demo that comes with the platform, and it has to describe what happens "under the hood". 
-It should be enough clear in details to allow another student to quickly get started with that platform, but critical enough to indicate the benefits and drawbacks compared to similar platforms.
+ 
 
-Obviously, it requires code.
-
+This task in particular is called **The Future / The Past**, which requires to research and present a paper or topic relating to post-silicon, post-moore advanced computing platforms such as quantum computing, biocomputing (including wet neural computing and molecular computing), exotic materials such as graphene or nan- otubes and devices such as memristors, etc. 
+Alternatively, it must contain the research and present on a topic related to pre-silicon computing, such as vacuum tubes, punched-cards, non-electrical comput- ing, water gates, the antikythera mechanism, analytical engine, etc. 
+The primary references for this task doesnt have to be an academic paper.
 
 ## Installation
 
-Create a new folder for the app,  download the microphone app, and extract the archive:
-```
-	curl -L https://github.com/wit-ai/microphone/releases/download/0.7.0/microphone-0.7.0.tar.gz | tar xvzf -
-	mv microphone-* microphone
-```
-
-Download these [index.html](https://github.com/andreeds/cs807-research-tasks/blob/master/B%20-%20The%20Platform/Wit/index.html) file.
-
-The index.html already contains the *Client Access Token* for the App.
-If you want to improve it or create on yourself, download the [ColourTest](https://wit.ai/andreeds/ColourTest) to your Wit app, create a new *Client Access Token* and replace it on the index.html file.
-
-Serve your app with the webserver of your choice.
-For example, using Python:
-```
-python -m SimpleHTTPServer
-```
-Go on Chrome, Firefox or Opera and hit ``http://localhost:8000``
-
-For more details, please check the [PDF paper](https://github.com/andreeds/cs807-research-tasks/blob/master/B%20-%20The%20Platform/Paper/Task_B_Andre_200334126.pdf) inside.
+No instalation required. There are no code. There only the latex code, but the the content can be directly accessed by the [PDF](https://github.com/andreeds/cs807-research-tasks/blob/master/E%20-%20The%20Future%20:%20The%20Past/Paper/Task_E_Andre_200334126.pdf).
 
 ## Tests
 
-Click on the mic picture on the webpage. Say the name of a colour or ask to change the coulour specifying it. 
-
-..or just say "Hello." 
-The app is polite ;)
+No tests required.
 
 ## License
 
-**Free Software, Hell Yeah!**
+If you going to refer to this content, plase make sure to **cite** the repstice authors on the Reference section.
