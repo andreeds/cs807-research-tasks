@@ -47,12 +47,12 @@
 
 %%%%% SHORT HEADING %%%%%%
 % Short headings should be running head and authors last names
-\ShortHeadings{The End of Life for Moore’s Law and the Future of Simulation}{dos Santos}
+\ShortHeadings{Beyond Quantum Computing: Are we living in a simulation}{dos Santos}
 \firstpageno{1}
 
 \begin{document}
 
-\title{Research Task E - The Future / The Past: \\ The End of Life for Moore’s Law \\and the Future of Simulation}
+\title{Research Task E - The Future / The Past: \\ Beyond Quantum Computing: \\Are we living in a simulation?}
 
 \author{\name André E. dos Santos \email dossantos@cs.uregina.ca \\
 \addr Department of Computer Science \\
@@ -64,39 +64,204 @@ Regina, Canada
 \maketitle
 
 \begin{abstract}%   <- trailing '%' for backward compatibility of .sty file
-
+When the future of computers comes to topic, \emph{quantum computers} is a salient topic.
+Quantum computers uses the properties of quantum mechanical states to solve certain specific problems much faster than we know how to solve them using a conventional computer.
+Thus, in the future humans will be able to simulate all of quantum chemistry and atomic physics efficiently, that means, humanity reached the ``posthuman'' stage.
+If quantum computers will simulate even billions of distance stars, it could simulate the history of society too.
+So, are we living in a computer simulation?
+In this paper we show that it might be true.
+\footnote{
+The content of this paper are drawn from \citep{thedg}, \citep{scott16}, and \citep{bostrom2003we}.
+For more details, please refer back to the original sources.
+}
 \end{abstract}
-
-
 
 
 \section{Introduction}
 \label{sec:intro}
 
 
-quantum computers 
+
+\emph{Moore's law} states that the number of transistors in a dense integrated circuit roughly doubles every two years \citep{schaller1997moore}.
+However, on the early 1980's scientists perceived that following this idea would lead to fundamental limits of computation.
+Since then, science has turn its attention for potential new sources of computers which could overcome that problem.
+Protein computers, DNA computers, optical computers, and molecular computers are some of the promising future for computers.
+But bets seems to be with quantum computers.
+A quantum computer is a device that utilizes the properties of the quantum world to solve certain specific problems much faster than a conventional computer as we know.
+The fundamental unit of information in quantum computing is called a \emph{quantum bit} (or qubit).
+A qubit differs radically from the laws of classical physics.
+A qubit can exist not only in a state corresponding to the logical state 0 or 1 as in a classical bit, but also in states corresponding to a blend or \emph{superposition} of these classical states.
+
+We can understand the the excitement around quantum computers when we understand its implication in science.
+It not only will bust up mostly of all today known tasks using computers, but it will also allow us to explore the whole universe by simulation.
+By simulating particles in the quantum computers we will have a better understanding of the universe and ourselves in the universe.
+For instance, three are string evidences that quantum computers are up to the task of simulating quantum field theory.
+David Deutch from the the University of Oxford even says that ``quantum computers can efficiently render every physically possible quantum environment, even when vast numbers of universes are interacting.''
+However, there are some limitations associate with quantum computers.
+The big concern is if it will be able to simulate \emph{quantum gravity}.
+While there some ideas of how quantum gravity works (such as \emph{string theory}), there is no final conclusion yet on how to combine quantum mechanics with Einstein’s general theory of relativity.
+Therefore, without being too technical, quantum gravity also might play a roll of limitations on the existence of quantum computers themselves.
+
+Humanity wants to reach a``posthuman'' stage where we will Moore's law
+Although humanity may find some troubles in the path to a post Moore's law stage (), we are mostly certain that eventually it ill happen.
+If will be able to simulate particles far way in the galaxy, why not simulate brain? Or a human? Or the society in 500 a.C.?
+The philosopher Dr. Nick Bostrom, from the University of Oxford prove that \emph{at least} one of the following propositions is true \citep{bostrom2003we}:
+(1) the human species is very likely to go extinct before reaching a ``posthuman'' stage; 
+(2) any posthuman civilization is extremely unlikely to run a significant number of simulations of their evolutionary history (or variations thereof); 
+(3) we are almost certainly living in a computer simulation. 
+
+
+This paper is organized as follows.
+Section \ref{sec:qc} presents an overview of quantum computers.
+The implications of quantum computers in the future are given in Section \ref{sec:bey}.
+Section \ref{sec:sim} shows simulation aspects in the future.
+Conclusions are drawn in Section \ref{sec:conc}.
+
+\section{Quantum Computer Overview}
+\label{sec:qc}
+
+
+The first ideas of a quantum computing mechanics happened in the 1970's and was first studied by physicists and computer scientists 
+Charles H. Bennett (IBM Thomas J. Watson Research Center), 
+Paul A. Benioff (Argonne National Laboratory),
+David Deutsch (University of Oxford),
+and Richard P. Feynman (Nobel laureate of the California Institute of Technology).
+What ignited the discussion on quantum computing, that came to be a big breakthrough in computer science, ,was ironically the pondering of the fundamental limits of computation.
+They realised that if  the technology indeed continued to follow Moore's Law then, in a just a couple of decades, the silicon chips would shrink so much to the point of a few atoms.
+When dealing with atomic scale the classical physical laws do not apply.
+Hence, the quantum mechanical conducts the behaviour and properties of this particular chip.
+
+In classical computer the laws of classical physics undoubtedly explain its behaviour.
+However, when dealing with quantum mechanics, it is necessary to perform new mode of information processing.
+For instance, we have to figure out how to manipulate the blurred rules of the quantum realm where subatomic particles can be in two places at once. 
+
+The fundamental unit of information in quantum computing is called a \emph{quantum bit} (or qubit).
+As from the laws of classical physics, a qubit is not binary.
+A qubit can exist not only in a state corresponding to the logical state 0 or 1 as in a classical bit, but also in states corresponding to a blend or superposition of these classical states \citep{thedg}.
+Thus, a qubit can exist as a zero, a one, or simultaneously as both 0 and 1, with a numerical coefficient representing the probability for each state. 
+It may seem counter-intuitive since we are used to the phenomenons to be ruled classical Newtonian physics, not quantum mechanics.
+
+To represent the impact of the the parallelism achieved through superposition consider the following: to performing the same operation of a quantum computer on a classical super computer it would be required  approximately 10,150 separate processors.
+Hence, not possible with today's technology.
+\cite{feynman1982simulating} also explained how such a powerful machine would be able to act as a simulator for quantum physics. 
+That is, a physicist could execute experiments in quantum physics inside a quantum mechanical computer.
+
+\section{Beyond Quantum Computing}
+\label{sec:bey}
+
+Scientists have been working since the 1980's to build a functional quantum computer.
+Some progress has been made, specially in the theory as we see further in this paper.
+And just recently, a startup which is currently testing a three-qubit chip made using aluminum circuits on a silicon wafer, announced the production of a 40 qubits chip for next year \citep{mitsu16}.
+
+What is exciting about news like this it is more than the possible applications.
+It is interesting because ``it defies our preconceptions about the ultimate limits of computation'' \citep{scott16}.
+And if it changes our perception about the limits of computation it also make us question if whether quantum computers are ``the end of the line.''
+One aspect that scientists wants to test is the scaling behaviour, since we could see profound differences between today’s computers and quantum computers.
+
+
+\subsection{The Simulation Machine}
+
+Let us consider we want to build a new airplane.
+As most of the products and building, we would not construct the actual airplane to test it.
+As today’s scientists no longer need real material to simulate classical physics, but instead represent airflow, soil stability, planetary motions, or whatever else necessary into digital computers.
+Thus, a quantum computer in the future would will be able to simulate all of quantum chemistry, atomic physics efficiently.
+
+Quantum computers can sound endless powerful capable to simulate anything, but there are some theories that are not even completely developed to be tested, e.g. vacuum in quantum field theories.
+Even more, although scientists have been able to already establish some solid ground base on realistic quantum field theory (see \citep{jordan2012quantum} for more details), there are still a lot to be worked on, specially with quantum gravity.
+
+\subsubsection{Simulating Quantum Gravity}
+
+If there a area of physics that  a quantum computer would have trouble simulating that would be \emph{quantum gravity} \citep{hamber2009quantum}. 
+Although there some strong ideas on this topic (most famously, \emph{string theory}), there is not ``no one really knows yet how to combine quantum mechanics with Einstein’s general theory of relativity'' \citep{scott16}.
+Even so, there are some experts, like famous mathematical physicist Roger Penrose, says that quantum gravity impossible to simulate using either an ordinary computer or a quantum computer.
+
+
+If Dr. Penrose categorizes quantum gravity as NP-complete problem, some scientists support the opposite idea: a quantum computer could efficiently simulate quantum gravity and even quantum-gravitational processes, e.g. the formation and evaporation of black holes.
+
+\subsubsection{The Black Hole Problem}
+
+Without getting into any further discussion about the possibility of simulating quantum gravity, let us consider two cases to hypothetically test that.
+
+First case, let us say we can program a computer that in each step of computation it only takes half of the time of the previous one.
+For instance, if the computer do the first step of a computation in one second, the second step in half a second, the third step in a quarter second, the fourth step in an eighth second, and so on.
+If so, this computer would have completed infinitely many steps in only two seconds (see more in \emph{Zeno’s paradox} \citep{erickson1998dictionary}).
+To run your computer with such speed, it would require a lot of energy for cooling.
+But so much energy that this amount of energy concentrated in so small a space, according to general relativity, this computer would collapse into a black hole.
+
+Now, in a second case, let us consider leaving a computer on Earth working on some incredibly hard calculation.
+After setting it up we would board a spaceship, accelerate to close to the speed of light, then decelerate and return to Earth.
+Depending on just how close we got to the speed of light in this trip, many years would have elapsed in Earth.
+Millions or even trillions of years according to Einstein’s  theory of relativity.
+If hypothetically we could find this computer it was still running, then we could learn the answer to this incredibly hard calculation.
+But, the more we want to speed up your computer, the closer we would have to accelerate your spaceship to the speed of light. 
+But the more you accelerate the spaceship, the more energy we would need.
+At some point, the spaceship would become so energetic that it, too, will collapse into to a black hole.
+ 
+Therefore, giving these both cases, we know that collapse into a black hole seems to be inevitable.
+Some scientist believe that quantum theory of gravity might let us surpass the known limits of quantum computers.
+However, quantum gravity might play just the opposite role, enforcing those limits.
+ 
+\section{Are we living in a simulation?}
+\label{sec:sim}
+
+We have learned that at our current stage of technological development we can not simulate tasks that would help us to understand the universe.
+But we also have confirmed that if the technological progress continues unabated, then these impossible tasks today will be solved someday in a not so distant future - the ``posthuman'' civilizations.
+Posthuman civilizations would have enough computing power to run hugely simulations.
+This simulations could be ancestor-simulations which even would use only a tiny fraction of their resources for that purpose.
+
+Simulating ancestors is not so strange as it might sound.
+First we have to understand that all system that implements the right sort of computational structures and processes, can be associated with conscious experiences.
+It is called \emph{substrate-independence}.
+Thus, silicon-based processors inside a computer could, in principle, be associated with the property of consciousness.
+Therefore, the consciousness of a carbon-based biological neural networks inside a cranium, that is our brain, could be simulated with a computer with enough processing power.
+
+If we would have such a powerful computer, why stop the simulation in only one brain?
+If brains could be simulated, then it is not hard to be convinced that ancestors civilizations also could be simulated.
+All to the point that the complete history of humanity could be simulated in the future by posthuman civilizations.
+
+Once convinced that ancestor-simulations may be executed by posthuman civilizations, let us consider the following equation which quantifies the actual fraction $f_{sim}$ of \emph{human-type experiences that live in simulations}\footnote{For a more detailed equation please refer back to the original source in \citep{bostrom2003we}.}:
+
+\begin{eqnarray*}
+	f_{sim} = \frac{f_p \cdot f_{int} \cdot \bar{N}_{int}}{(f_p \cdot f_{int} \cdot \bar{N}_{int}) + 1}
+\end{eqnarray*}
+where 
+$f_p$ is the fraction of all human-level technological civilizations that survive to reach a posthuman stage,
+$f_{int}$ is the fraction of posthuman civilizations that are interested in running ancestor-simulations, and
+$\bar{N}_{int}$ is the average number of ancestor-simulations run by such interested civilizations.
+
+
+Because of the immense power of computation posthuman may reach with sources such as quantum computers, $\bar{N}_{int}$ is extremely large.
+Thus, \emph{at least} one of the following three propositions must be true:
+\begin{align}
+	f_p &\approx  0 \label{eq:fp_0} \\
+	f_{int} &\approx  0 \label{eq:fint_0} \\
+	f_{sim} &\approx  1 \label{eq:fsim_1}
+\end{align}
 
 
 
-%This paper is organized as follows.
-%Section \ref{sec:get} presents the steps to create a application of Wit.
-%A web application with Wit is given in Section \ref{sec:web}.
-%Conclusions are drawn in Section \ref{sec:conc}.
+Equation (\ref{eq:fp_0}) means that the fraction of human- level civilizations that reach a posthuman stage is very close to zero.
+Equation (\ref{eq:fint_0}) refers to fraction of posthuman civilizations that are interested in running ancestor-simulations is very close to zero.
+And Equation (\ref{eq:fsim_1}) indicates that the fraction of all people with our kind of experiences that are living in a simulation is very close to one.
 
-
-
-
-
+A little more in details, if (\ref{eq:fp_0}) is true, then we will almost certainly go extinct before reaching posthumanity.
+That means that something will happen before we reach the posthumanity with such powerful computers.
+Diseases, wars, hunger; there are a lot of possibilities, we know.
+But let us be optimistic and say that is not going to happen and we will then achieve posthumanity.
+Then, if (\ref{eq:fint_0}) is true, then there are no individual in the posthumanity, relatively wealthy enough, who desires to run ancestor-simulations.
+Or, he/she is not free to do so.
+Finally, if (\ref{eq:fsim_1}) is true, then we almost certainly live in a simulation. 
+As Dr. Bostrom says, ``it seems sensible to apportion one’s credence roughly evenly between (\ref{eq:fp_0}), (\ref{eq:fint_0}), and (\ref{eq:fsim_1}).''Thus, unless we are now living in a simulation, our descendants will almost certainly never run an ancestor-simulation.
 
 \section{Conclusion}
 \label{sec:conc}
 
-
-
-
-
-
-
+By utitilizing some of the properties of quantum mechanical states, quantum computer has taken the attention of scientists.
+It may be able to solve variety of problems much faster than we know how to solve them using a conventional computer.
+One task that can be well performed by quantum computer is simulations.
+Although there might be some restrictions imposed by quantum gravity due our current lack of knowledge in the field, quantum computer can have the right source of power computation to lead us to posthuman civilization.
+In a posthuman civilization we will be able to understand better the universe by simulating particles and also understand better ourselves by ancestor-simulations.
+By studying this phenomenon, we could get the conclusion that either one of the three facts are true: (1) we will go extinct before reaching posthumanity, (2) there is nobody in the posthuman interest (or allow to be) in such a simulation, or (3) we are most likely to be currently living in a simulation.
 
 \vskip 0.2in
 \bibliography{references/references}
