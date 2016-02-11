@@ -22,7 +22,7 @@ and the *html* circle on the webpage will change its colour fill to blue.
 
 This project is one research task of the class *CS 807: Interactive Hardware and Embedded Computing*.
 
-This task in particulas is called **The Platform**, which requires to research and implement a practical example of an embedded, cloud, or high-performance computing platform, with a demonstration of the use of that platform. 
+This task in particular is called **The Platform**, which requires to research and implement a practical example of an embedded, cloud, or high-performance computing platform, with a demonstration of the use of that platform. 
 It has to show more than the simple "hello world" demo that comes with the platform, and it has to describe what happens "under the hood". 
 It should be enough clear in details to allow another student to quickly get started with that platform, but critical enough to indicate the benefits and drawbacks compared to similar platforms.
 
