@@ -38,4 +38,4 @@ No tests required.
 
 ## License
 
-If you going to refer to this content, plase make sure to **cite** the repstice authors on the Reference section.
+If you going to refer to this content, plase make sure to **cite** the repective authors on your Reference section.
