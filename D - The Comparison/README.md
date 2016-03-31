@@ -56,7 +56,7 @@ You can also install Keras from PyPI:
 sudo pip install keras
 ```
 
-The content can be directly accessed by the [PDF](https://github.com/andreeds/cs807-research-tasks/blob/master/C%20-%20The%20Problem/Paper/Task_C_Andre_200334126.pdf).
+>The content can be directly accessed by the [PDF](https://github.com/andreeds/cs807-research-tasks/blob/master/D%20-%20The%20Comparison/Paper/Task_D_Andre_200334126.pdf).
 
 ## Tests
 
